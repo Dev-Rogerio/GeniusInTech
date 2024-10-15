@@ -1,11 +1,8 @@
-// src/firebaseConfig.js (ou na raiz, se preferir)
-
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { db, auth } from '../src/firebaseConfig.js'
 
-// Suas credenciais Firebase
+// credenciais Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyBJBAvW4VDLL1eKQgeEzsnzHcSovffzodY",
   authDomain: "geniusintech-fca65.firebaseapp.com",
@@ -22,5 +19,4 @@ const app = initializeApp(firebaseConfig);
 // Serviços que você quer usar
 const db = getFirestore(app); // Banco de dados Firestore
 const auth = getAuth(app);    // Autenticação Firebase
-
 export { db, auth };
