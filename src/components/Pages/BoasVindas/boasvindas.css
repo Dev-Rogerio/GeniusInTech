@@ -1,0 +1,78 @@
+/* Estilos gerais da página de boas-vindas */
+.boas-vindas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: none; /* Sem cor de fundo para permitir ver o fundo da landing page */
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.boas-vindas-content {
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1.5s ease-in-out;
+  max-width: 600px;
+  width: 100%;
+  border: 1px solid rgba(224, 224, 224, 0.8); /* Borda semi-transparente */
+}
+
+.boas-vindas-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #0084ff;
+  letter-spacing: 1.5px;
+}
+
+.boas-vindas-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.voltar-btn {
+  background-color: #00bfa6;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.voltar-btn:hover {
+  background-color: #0084ff;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .boas-vindas-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .boas-vindas-content p {
+    font-size: 1rem;
+  }
+
+  .voltar-btn {
+    font-size: 0.9rem;
+    padding: 10px 25px;
+  }
+}
