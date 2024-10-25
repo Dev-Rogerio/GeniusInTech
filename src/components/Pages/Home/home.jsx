@@ -24,6 +24,7 @@ import axios from "axios";
 import ModalBoasVindas from "./modal-boasvindas";
 import ProjectOne from "../../../Modal/projectOne";
 import ProjectTwo from "../../../Modal/projecttwo";
+import ProjectThree from "../../../Modal/projectThree";
 
 function Home() {
   const [pageProjectOne, setPageProjectOne] = useState(false);
@@ -32,11 +33,16 @@ function Home() {
   const [showModalServices, setShowModalServices] = useState(false);
   const [isModalBoasVindas, setIsModalBoasVindas] = useState(false);
   const [isProjectOne, setIsProjectOne] = useState(false);
-  const [projectTwo, setProjectTwo] = useState(false);
+  const [isProjectTwo, setIsProjectTwo] = useState(false);
+  const [isProjectThree, setIsProjectThree] = useState(false);
+  // const [projectTwo, setProjectTwo] = useState(false);
   const [openProject, setOpenProject] = useState(false);
   const [textOne, setTextOne] = useState('saiba mais ⬎');
   const [textTwo, setTextTwo] = useState('saiba mais ⬎');
-  const timeoutRef = useRef(null);
+  const [textThree, setTextThree] = useState('saiba mais ⬎');
+  const timeoutRefOne = useRef(null);
+  const timeoutRefTwo = useRef(null);
+  const timeoutRefThree = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -54,22 +60,53 @@ function Home() {
     sendEmail();
   }
 
-  const handleMouseEnter = () => {
+  const handleMouseProjectOne = () => {
     setTextOne('abrir ⬏')
-    timeoutRef.current = setTimeout(() => {
+    timeoutRefOne.current = setTimeout(() => {
       setIsProjectOne(true);
     }, 3000);
   };
 
-  const handleMouseLeave = () => {
-    clearTimeout(timeoutRef.current);
-    setTextOne('saiba mais ⬎');
+  const handleMouseEnterProjectTwo = () => {
+    setTextTwo('abrir ⬏')
+    timeoutRefTwo.current = setTimeout(() => {
+      setIsProjectTwo(true);
+    }, 3000);
   }
 
-  const handleClickSaibaMais = () => {
+  const handleMouseEnterProjectThree = () => {
+    setTextThree('abrir ⬏')
+    timeoutRefThree.current = setTimeout(() => {
+      setIsProjectThree(true);
+    }, 3000)
+  }
+
+  const handleMouseLeaveOne = () => {
+    clearTimeout(timeoutRefOne.current);
+    setTextOne('saiba mais ⬎');
+  }
+  const handleMouseLeaveProjectTwo = () => {
+    clearTimeout(timeoutRefTwo.current);
+    setTextTwo('saiba mais ⬎')
+  }
+
+  const handleMouseLeaveProjectThree = () => {
+    clearTimeout(timeoutRefThree.current);
+    setTextThree('saiba mais ⬎')
+  }
+
+  const handleClickSaibaMaisOne = () => {
     console.log('clicou')
     setIsProjectOne(true);
   };
+
+  const handleClickSaibaMaisTwo = () => {
+    setIsProjectTwo(true)
+  }
+
+  const handleClickSaibaMaisThree = () => {
+    setIsProjectThree(true)
+  }
 
   const handleCloseModal = () => {
     setIsProjectOne(false);
@@ -221,36 +258,44 @@ function Home() {
             <ModalBoasVindas isModalBoasVindas={isModalBoasVindas} setIsModalBoasVindas={setIsModalBoasVindas} />
             <section className="_secContato" id="contact">
               <h2>serviços</h2>
-              <h1>Qual o site ideal para seu negócio.</h1>
-              <h1>Receba Nossos Serviços.</h1>
-              <form onSubmit={handleSubmit}>
-                <article>
-                  <label htmlFor="name">Nome:</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required />
-                </article>
-                <article>
-                  <label htmlFor="email">Email:</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required />
-                </article>
-                <article>
-                  <button type="submit" onClick={() => setIsModalBoasVindas(true)} >Enviar</button>
-                </article>
-              </form>
+              <section className="_secContatoBox">
+                <h1>Qual o site ideal para seu negócio.</h1>
+                <h1>Receba Nossos Serviços.</h1>
+                <form onSubmit={handleSubmit}>
+                  <article>
+                    <label htmlFor="name">Nome:</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required />
+                  </article>
+                  <article>
+                    <label htmlFor="email">Email:</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required />
+                  </article>
+                  <article>
+                    <label htmlFor="message">Mensagem:</label>
+                    <textarea id="message" name="message" required></textarea>
+                  </article>
+                  <article>
+                    <button type="submit" onClick={() => setIsModalBoasVindas(true)} >Enviar</button>
+                  </article>
+                </form>
+              </section>
             </section>
             <section className="_secPortfolio" id="portfolio">
               <ProjectOne ativo={isProjectOne} setAtivo={setIsProjectOne} />
+              <ProjectTwo ativo={isProjectTwo} setAtivo={setIsProjectTwo} />
+              <ProjectThree ativo={isProjectThree} setAtivo={setIsProjectThree} />
               <h2>Portfólio</h2>
               <div className="sobre-nos-container">
                 <img src={Portifolio} alt="Sobre Nós" className="sobre-nos-image" />
@@ -258,23 +303,29 @@ function Home() {
               <div className="portfolio-list">
                 <div
                   className="portfolio-item"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                  onClick={handleClickSaibaMais}>
+                  onMouseEnter={handleMouseProjectOne}
+                  onMouseLeave={handleMouseLeaveOne}
+                  onClick={handleClickSaibaMaisOne}>
                   <h3>Projeto 1</h3>
                   <p>Descrição do projeto.</p>
                   <p>{textOne}</p>
                 </div>
                 <div className="portfolio-item"
-                  onClick={() => setProjectTwo(true)}>
+                  onMouseEnter={handleMouseEnterProjectTwo}
+                  onMouseLeave={handleMouseLeaveProjectTwo}
+                  onClick={handleClickSaibaMaisTwo}>
                   <h3>Projeto 2</h3>
                   <p>Descrição do projeto.</p>
-                  <p></p>
+                  <p>{textTwo}</p>
                 </div>
-                <div className="portfolio-item">
+                <div className="portfolio-item"
+                  onMouseEnter={handleMouseEnterProjectThree}
+                  onMouseLeave={handleMouseLeaveProjectThree}
+                  onClick={handleClickSaibaMaisThree}
+                >
                   <h3>Projeto 3</h3>
                   <p>Descrição do projeto.</p>
-                  <p>fechar ⬏ : saiba mais ⬎</p>
+                  <p>{textThree}</p>
                 </div>
               </div>
             </section>

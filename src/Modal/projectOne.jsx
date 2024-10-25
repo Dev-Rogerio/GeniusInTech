@@ -8,9 +8,9 @@ const ProjectOne = ({ ativo, setAtivo }) => {
   return (
     <>
       {ativo ? (
-        <div className="modal-overlayProjectOne">
-          <div className="modal-contentProjectOne">
-            <button className="close-buttonProjectOne" onClick={() => setAtivo(false)} >X</button>
+        <div className="modal-overlayProjectAll">
+          <div className="modal-contentProjectAll">
+            <button className="close-buttonProjectAll" onClick={() => setAtivo(false)} >X</button>
             <h1>Projeto 1</h1>
             <p>
               O projeto Geniuns in Tech consiste no desenvolvimento de uma plataforma digital voltada para soluções inovadoras em tecnologia, com foco em oferecer serviços personalizados em áreas como desenvolvimento web, marketing digital e automação de processos. O objetivo do projeto é atender empresas de pequeno e médio porte, proporcionando soluções eficientes para aumentar a presença digital e otimizar operações internas. A plataforma inclui funcionalidades como criação de sites, gerenciamento de campanhas em redes sociais, análise de dados e suporte técnico contínuo.

@@ -10,6 +10,7 @@ import ModalServices from './components/Pages/Home/modal-services.jsx';
 import ModalBoasVindas from "./components/Pages/Home/modal-boasvindas.jsx";
 import ProjectOne from './Modal/projectOne.jsx';
 import ProjectTwo from './Modal/projecttwo.jsx';
+import ProjectThree from './Modal/projectThree.jsx';
 import setCSSVariables from './utils/colors';
 function App() {
   useEffect(() => {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/modal-services" element={<ModalServices />} />
           <Route path="/project-one" element={<ProjectOne />} />
           <Route path="/project-two" element={<ProjectTwo />} />
+          <Route path="/project-three" element={<ProjectThree />} />
         </Routes>
       </Router>
     </React.Fragment>
