@@ -1,36 +1,28 @@
-.whataapp-button-container {
+.whatsapp-button {
   position: fixed;
-  bottom: 20px;
   right: 20px;
-}
-.whatsappIcon {
-  position: fixed;
   bottom: 20px;
-  right: 20px;
-  z-index: 1000;
+  background-color: #25d366; 
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
-}
-
-
-.whatsapp-button {
-  background-color: #25d366;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  padding: 10px 20px;
   font-size: 16px;
-  cursor: pointer;
-  box-shadow:  0px 4px 8px rgbe(0,0,0,0.2);
-  transition: transform 0.3s;
+  font-weight: bold;
+  z-index: 1000;
+  text-decoration: none;
+  transition: transform 0.3s ease;
 }
+
+.whatsapp-button img {
+  margin-right: 10px;
+  width: 30px;
+  filter: brightness(0) invert(1); /* Garante que o ícone fique branco sobre fundo colorido */
+}
+
 .whatsapp-button:hover {
   transform: scale(1.1);
+  background-color: #128c7e;
 }
-.whatsapp-button:focus {
-  outline: none;
-}
-.whatsappIcon img {
-  width: 45px;
-} 
-
