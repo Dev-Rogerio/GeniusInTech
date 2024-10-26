@@ -163,7 +163,7 @@ function Home() {
       <div className="content-wrap">
         <div className="template">
           <img className="fundo" src={FundoTransparent} alt="Fundo decorativo" />
-          <header>
+          <header className="_header">
             <section className="_secLogo">
               <section className="logoBlack">
                 <img src={LogoMarca} alt="Logo Genius In Tech" />
@@ -186,7 +186,7 @@ function Home() {
               <li><a href="/blog">Blog</a></li>
             </ul>
           </nav>
-          <main>
+          <main className="_main">
             <section className="_secHome" id="home">
               <h2>Bem-vindo ao Genius In Tech</h2>
               <p>Inovação e tecnologia ao seu alcance.</p>
@@ -217,23 +217,29 @@ function Home() {
               <div className="sobre-nos-container">
                 <img src={SobreNos} alt="Sobre Nós" className="sobre-nos-image" />
               </div>
-              <p>
-                Somos uma empresa focada em soluções inovadoras no campo da tecnologia e desenvolvimento de software. Nosso objetivo é transformar ideias em produtos digitais eficientes e de alta qualidade.
-              </p>
+              <div className="textP">
+                <p>
+                  Somos uma empresa focada em soluções inovadoras no campo da tecnologia e desenvolvimento de software. Nosso objetivo é transformar ideias em produtos digitais eficientes e de alta qualidade.
+                </p>
+              </div>
             </section>
             <section className="_secMissao">
               <h2>Missão</h2>
               <div className="sobre-nos-container">
                 <img src={Missao} alt="Sobre Nós" className="sobre-nos-image" />
               </div>
-              <p>Entregar soluções tecnológicas que façam a diferença na vida de nossos clientes.</p>
+              <div className="textP">
+                <p>Entregar soluções tecnológicas que façam a diferença na vida de nossos clientes.</p>
+              </div>
             </section>
             <section className="_secVisao">
               <h2>Visão</h2>
               <div className="sobre-nos-container">
                 <img src={Visao} alt="Sobre Nós" className="sobre-nos-image" />
               </div>
-              <p>Ser referência em inovação e desenvolvimento tecnológico no mercado global.</p>
+              <div className="textP">
+                <p>Ser referência em inovação e desenvolvimento tecnológico no mercado global.</p>
+              </div>
             </section>
             <section className="_secValores">
               <h2>Valores</h2>
@@ -247,12 +253,14 @@ function Home() {
                 <li>Transparência</li>
               </ul>
             </section>
-            <section className="_secSevicos" id="services">
+            <section className="_secServicos" id="services">
               <h2>Serviços</h2>
               <div className="sobre-nos-container">
                 <img src={Servicos} alt="Sobre Nós" className="sobre-nos-image" />
               </div>
-              <p>Descubra os serviços que oferecemos.</p>
+              <div className="textP">
+                <p>Descubra os serviços que oferecemos.</p>
+              </div>
               <button className="cta-button">Clique aqui</button>
             </section>
             <ModalBoasVindas isModalBoasVindas={isModalBoasVindas} setIsModalBoasVindas={setIsModalBoasVindas} />

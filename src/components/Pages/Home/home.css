@@ -32,24 +32,6 @@ body {
 .content-wrap {
   flex: 1; 
 }
-@keyframes zoomIn {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -78,8 +60,7 @@ nav ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  justify-content: space-around;
-  
+  justify-content: space-around;  
 }
 nav ul li {
   display: inline-block; 
@@ -167,7 +148,7 @@ main {
 ._secSobreNos, 
 ._secMissao, 
 ._secVisao,
-._secSevicos,
+._secServicos,
 ._secValores,
 ._secContato,
 ._secPortfolio,
@@ -190,7 +171,7 @@ main {
 ._secMissao h2, 
 ._secVisao h2, 
 ._secValores h2, 
-._secSevicos h2,
+._secServicos h2,
 ._secContato h2,
 ._secPortfolio h2,
 ._secTestimonials h2 {
@@ -203,6 +184,56 @@ main {
   margin-bottom: 40px;
   text-transform: uppercase;
 }
+.testimonials-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  width: 100%;
+}
+.testimonial-item {
+  flex: 1 1 calc(30% - 20px); /* Cada item ocupará 30% da largura, com um espaço de 20px entre eles */
+  margin: 10px; /* Adiciona margem entre os itens */
+  background-color: white; /* Para visualização */
+  padding: 20px; /* Adiciona preenchimento dentro dos itens */
+  border-radius: 5px; /* Para arredondar os cantos dos itens */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
+}
+.testimonial-item {
+  background-color: var(--main-white);
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.testimonial-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  background-color: var(--main-yellow);
+}
+.testimonial-item p {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.6;
+}
+.testimonial-item p::before {
+  content: "“";
+  font-size: 2rem;
+  color: #ff7f50;
+}
+.testimonial-item p::after {
+  content: "”";
+  font-size: 2rem;
+  color: #ff7f50;
+  margin-left: 5px;
+}
+.testimonial-item p span {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+}
 ._secHome h2 {
   color: var(--main-yellow);
 }
@@ -211,7 +242,7 @@ main {
 ._secMissao h1, 
 ._secVisao h1,
 ._secValores h1,
-._secSevicos h1,
+._secServicos h1,
 ._secContato h1,
 ._secPortfolio h1
 {
@@ -224,18 +255,29 @@ main {
 ._secMissao p, 
 ._secVisao p,
 ._secValores p,
-._secSevicos p,
+._secServicos p,
 ._secContato p,
 ._secPortfolio p
 {
   font-size: 1.5rem;
   color: #555;
   margin-bottom: 30px;
+  text-align: justify; 
+}
+.textP {
+  max-width: 50%;
+}
+.sobre-nos-container {
+  display: flex;  
+  width: 100%; 
 }
 .sobre-nos-container img {
+  display: flex;
+  margin-left: 50%;
+  transform: translate(-50%);
   max-width: 50%;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  border-radius: 10px; 
+  margin-bottom: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 ._secContato form {
@@ -369,7 +411,7 @@ button.video-button {
   padding-left: 0;  
 } 
 ._secValores ul li {
-  font-size: 18px;
+  font-size: 25px;
   margin: 10px 0;
 } 
 ._secValores ul li::before {
@@ -532,57 +574,12 @@ button.video-button {
   color: #007bff ;
 }
 .portfolio-list {
+  display: flex;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 80px;
   justify-content: center;
-}
-.testimonials-list {
-  padding-left: 25px;
-  position: relative;
-  margin-bottom: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-  padding-left: 30px;
-  padding-right: 30px; 
-}
-.testimonial-item {
-  background-color: var(--main-white);
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 600px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.testimonial-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-  background-color: var(--main-yellow);
-}
-.testimonial-item p {
-  font-size: 1.2rem;
-  color: #555;
-  line-height: 1.6;
-}
-.testimonial-item p::before {
-  content: "“";
-  font-size: 2rem;
-  color: #ff7f50;
-}
-.testimonial-item p::after {
-  content: "”";
-  font-size: 2rem;
-  color: #ff7f50;
-  margin-left: 5px;
-}
-.testimonial-item p span {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #333;
 }
 .modal-project-one {
   position: fixed;
@@ -604,16 +601,6 @@ button.video-button {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-}
-@media (min-width: 768px) {
-  .testimonials-list {
-    flex-direction: row;
-    justify-content: center;
-  }  
-  .testimonial-item {
-    flex: 1;
-    max-width: 400px;
-  }
 }
 p {
   font-size: 1.2rem;
@@ -765,19 +752,6 @@ section {
   color: #ccc;
   text-align: center;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/* Estilo para o contêiner da seção */
 ._secContatoBox  {
   background-color: #ccc; 
   padding: 40px 20px;
@@ -787,44 +761,28 @@ section {
   margin: 0 auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
-/* Estilos para os títulos */
-/* ._secContato h2 {
-  color: #0d6efd; 
- 
-  font-weight: 700;
-  margin-bottom: 10px;
-} 
-*/
 ._secContato h1 {
   color: #333; 
   font-size: 32px;
   margin-bottom: 20px;
   line-height: 1.2;
 }
-
-/* Estilos para o formulário */
 ._secContato form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-
-/* Estilos para os artigos (campos do formulário) */
 ._secContato article {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
 }
-
-/* Estilos para os labels */
 ._secContato label {
   font-weight: bold;
   margin-bottom: 5px;
   color: #555;
 }
-
-/* Estilos para os inputs e textarea */
 ._secContato input,
 ._secContato textarea {
   width: 100%;
@@ -834,14 +792,11 @@ section {
   font-size: 16px;
   transition: border-color 0.3s;
 }
-
 ._secContato input:focus,
 ._secContato textarea:focus {
-  border-color: #0d6efd; /* Cor de borda em foco */
+  border-color: #0d6efd; 
   outline: none;
 }
-
-/* Estilos para o botão de envio */
 ._secContato button {
   background-color: #0d6efd;
   color: #fff;
@@ -853,21 +808,193 @@ section {
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
 ._secContato button:hover {
-  background-color: #084298; /* Tom mais escuro no hover */
+  background-color: #084298; 
 }
-
+/* Estilos para telas abaixo de 768px */
 @media (max-width: 768px) {
-  .portfolio-list {
-    flex-direction: column;
-  }  
-  nav ul {
-    flex-direction: column;
-    gap: 10px;
+  ._header {
+    height: 220px;   
+}
+  .nav {
+    display: none;
+}
+  ._main{
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+   ._main h2{
+    font-size: 1.4rem;
+}
+.textP {
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+.textP p:nth-child(1) {
+  font-size: 12px;  
+}
+.textP p:nth-child(2) {
+  font-size: 12px; 
+}
+._secValores ul li {
+  font-size: 12px;
+}
+._secServicos .cta-button {
+  width: 150px;
+  font-size: 14px;
+}
+  .button-container .cta-button{
+    padding: 12px 40px;
+    font-size: 0.9rem; 
+    width: 45%;   
+   }
+   ._secContato {
+    background-color: var(--main-yellow) !important;
+   }
+   ._secContato h2 {
+    color: var(--main-blue) !important;
+    font-size: 24px !important;
+   }
+   ._secContato h1 {
+    font-size: 18px;
+        
+   }
+   ._secContatoBox {
+    background-color: #ccc;
   }
-  button.cta-button, button.video-button {
+  ._secServicos h2 {
+    font-size: 24px;
+  }
+  form article label {
+    font-size: 12px !important;
+  }
+  form article input {
+    height: 25px !important;
+  }
+  form article {
+    margin: 0 !important;
+  }
+  form article button {
+    font-size: 12px !important;
+  }
+  .portfolio-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .portfolio-item {
+    width: 25% !important;
+    width: calc(50% - 10px);
+    margin: 5px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 !important;
+
+  }
+  .portfolio-item h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;   
+    text-align: center;   
+    font-size: 16px;
+    text-indent: 0;
+  }
+  .portfolio-item p:nth-child(2) {
+    display: flex;
     width: 100%;
+    font-size: 10px !important;
+    text-align: center;
+  }
+  .portfolio-item p:nth-child(3) {
+    font-size: 8px !important;
+  }
+  .testimonial-item p {
+    margin-top: 5px; /* Pequeno espaço no topo para espaçamento */
+    padding: 0 5px; /* Um leve padding nas laterais para melhor alinhamento */
+    font-size: 10px; /* Aumenta ligeiramente para melhorar a legibilidade */
+    line-height: 1.4; /* Ajusta o espaçamento entre as linhas para uma leitura mais confortável */
+    text-align: justify; /* Mantém o texto justificado */
+    text-indent: 0; /* Remove indentação */
+  }
+  
+  .testimonial-item {    
+    padding: 10px; /* Ajusta padding para dar espaço ao conteúdo */
+    height: auto; /* Deixe o contêiner expandir de acordo com o conteúdo */
+    background-color: #f9f9f9; /* Opcional: uma cor de fundo suave */
+    border-radius: 8px; /* Adiciona uma leve borda arredondada */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombras leves para destaque */
+  }
+}
+@media (max-width: 768px) {
+  /* Estilização geral do footer */
+  footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #333; /* Exemplo de cor de fundo */
+    color: #fff; /* Cor do texto */
+  }
+
+  /* Ajuste de título e subtítulo no footer */
+  footer h3, footer h4 {
+    font-size: 16px;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  /* Lista de links no footer */
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+  }
+
+  .footer-links a {
+    font-size: 14px;
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover {
+    color: #fff; /* Mudança de cor ao passar o mouse */
+  }
+
+  /* Redes sociais no footer */
+  .footer-social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  .footer-social-icons a {
+    font-size: 20px;
+    color: #ccc;
+    transition: color 0.3s;
+  }
+
+  .footer-social-icons a:hover {
+    color: #fff; /* Alteração da cor ao passar o mouse */
+  }
+
+  /* Informações adicionais no footer */
+  .footer-info {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* Ajuste no padding e na largura para evitar quebras de linha */
+  footer p, footer div {
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
