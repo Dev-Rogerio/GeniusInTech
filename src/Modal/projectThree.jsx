@@ -13,7 +13,7 @@ const ProjectThree = ({ ativo, setAtivo }) => {
             </h1>
             <p>
               Descrição do Projeto:
-              O Projeto 3 foi desenvolvido para a Kamisaria com foco na criação de uma Plataforma de Gestão de Clientes e Vendas. O objetivo principal foi aprimorar o relacionamento com os clientes e otimizar o processo de vendas, oferecendo uma interface moderna e funcional para gestão de dados e acompanhamento de pedidos.s
+              O Projeto 3 foi desenvolvido para a Kamisaria com foco na criação de uma Plataforma de Gestão de Clientes e Vendas. O objetivo principal foi aprimorar o relacionamento com os clientes e otimizar o processo de vendas, oferecendo uma interface moderna e funcional para gestão de dados e acompanhamento de pedidos.
             </p>
             <p>
               Minhas principais contribuições no projeto incluíram:
@@ -34,7 +34,7 @@ const ProjectThree = ({ ativo, setAtivo }) => {
             <button className="cta-button" onClick={() => setAtivo(false)}>Fechar</button>
           </div>
         </div>
-      ) : null};
+      ) : null}
     </>
   )
 }

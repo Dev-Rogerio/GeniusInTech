@@ -15,7 +15,7 @@ import WhatsappIcon from '../../../assets/image.png';
 import emailjs from 'emailjs-com';
 
 import '../Home/home.css';
-import '../Home/home.mobile.css'
+import '../Home/home.mobile.css';
 
 import ContactPage from "../../../SiteLanding/contactPage";
 import Services from "./modal-services";
@@ -51,9 +51,12 @@ function Home() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const toggleMenu = () => {
+
+  const handleToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,52 +64,55 @@ function Home() {
   }
 
   const handleMouseProjectOne = () => {
-    setTextOne('abrir ⬏')
+    setTextOne('abrir ⬏');
     timeoutRefOne.current = setTimeout(() => {
       setIsProjectOne(true);
     }, 3000);
   };
 
   const handleMouseEnterProjectTwo = () => {
-    setTextTwo('abrir ⬏')
+    setTextTwo('abrir ⬏');
     timeoutRefTwo.current = setTimeout(() => {
       setIsProjectTwo(true);
     }, 3000);
-  }
+  };
 
   const handleMouseEnterProjectThree = () => {
-    setTextThree('abrir ⬏')
+    setTextThree('abrir ⬏');
     timeoutRefThree.current = setTimeout(() => {
       setIsProjectThree(true);
-    }, 3000)
-  }
+    }, 3000);
+  };
 
   const handleMouseLeaveOne = () => {
     clearTimeout(timeoutRefOne.current);
     setTextOne('saiba mais ⬎');
-  }
+  };
+
   const handleMouseLeaveProjectTwo = () => {
     clearTimeout(timeoutRefTwo.current);
-    setTextTwo('saiba mais ⬎')
-  }
+    setTextTwo('saiba mais ⬎');
+  };
 
   const handleMouseLeaveProjectThree = () => {
     clearTimeout(timeoutRefThree.current);
-    setTextThree('saiba mais ⬎')
-  }
+    setTextThree('saiba mais ⬎');
+  };
+
 
   const handleClickSaibaMaisOne = () => {
-    console.log('clicou')
+    console.log('clicou');
     setIsProjectOne(true);
   };
 
+
   const handleClickSaibaMaisTwo = () => {
-    setIsProjectTwo(true)
-  }
+    setIsProjectTwo(true);
+  };
 
   const handleClickSaibaMaisThree = () => {
-    setIsProjectThree(true)
-  }
+    setIsProjectThree(true);
+  };
 
   const handleCloseModal = () => {
     setIsProjectOne(false);
@@ -163,20 +169,32 @@ function Home() {
       <div className="content-wrap">
         <div className="template">
           <img className="fundo" src={FundoTransparent} alt="Fundo decorativo" />
+
           <header className="_header">
+
             <section className="_secLogo">
+
               <section className="logoBlack">
                 <img src={LogoMarca} alt="Logo Genius In Tech" />
               </section>
-
             </section>
-            <div className="menu-togle" onClick={toggleMenu}>
+
+
+            <div className="menu-toggle" onClick={handleToggle}>
+              <div className="bar"></div>
+              <div className="bar"></div>
+              <div className="bar"></div>
+            </div>
+
+
+
+            <div className="menu-togle" onClick={handleToggle}>
               <div className={`bar ${isMenuOpen ? 'open' : ''} `}></div>
               <div className={`bar ${isMenuOpen ? 'open' : ''} `}></div>
               <div className={`bar ${isMenuOpen ? 'open' : ''} `}></div>
             </div>
-          </header>
 
+          </header>
           <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
             <ul>
               <li><a href="#home" aria-current="page">Home</a></li>
@@ -186,7 +204,9 @@ function Home() {
               <li><a href="/blog">Blog</a></li>
             </ul>
           </nav>
+
           <main className="_main">
+
             <section className="_secHome" id="home">
               <h2>Bem-vindo ao Genius In Tech</h2>
               <p>Inovação e tecnologia ao seu alcance.</p>
@@ -212,6 +232,7 @@ function Home() {
                 <button className="video-button" onClick={() => setShowVideo(true)}>Assista o vídeo</button>
               </div>
             </section>
+
             <section className="_secSobreNos" id="about">
               <h2>Sobre Nós</h2>
               <div className="sobre-nos-container">
@@ -223,6 +244,7 @@ function Home() {
                 </p>
               </div>
             </section>
+
             <section className="_secMissao">
               <h2>Missão</h2>
               <div className="sobre-nos-container">
@@ -232,6 +254,7 @@ function Home() {
                 <p>Entregar soluções tecnológicas que façam a diferença na vida de nossos clientes.</p>
               </div>
             </section>
+
             <section className="_secVisao">
               <h2>Visão</h2>
               <div className="sobre-nos-container">
@@ -241,6 +264,7 @@ function Home() {
                 <p>Ser referência em inovação e desenvolvimento tecnológico no mercado global.</p>
               </div>
             </section>
+
             <section className="_secValores">
               <h2>Valores</h2>
               <div className="sobre-nos-container">
@@ -253,6 +277,7 @@ function Home() {
                 <li>Transparência</li>
               </ul>
             </section>
+
             <section className="_secServicos" id="services">
               <h2>Serviços</h2>
               <div className="sobre-nos-container">
@@ -263,12 +288,14 @@ function Home() {
               </div>
               <button className="cta-button">Clique aqui</button>
             </section>
+
             <ModalBoasVindas isModalBoasVindas={isModalBoasVindas} setIsModalBoasVindas={setIsModalBoasVindas} />
+
             <section className="_secContato" id="contact">
               <h2>serviços</h2>
               <section className="_secContatoBox">
-                <h1>Qual o site ideal para seu negócio.</h1>
-                <h1>Receba Nossos Serviços.</h1>
+                <h1>Qual o site ideal para seu negócio?</h1>
+                <h1>Receba Nossos Serviços!</h1>
                 <form onSubmit={handleSubmit}>
                   <article>
                     <label htmlFor="name">Nome:</label>
@@ -300,14 +327,17 @@ function Home() {
                 </form>
               </section>
             </section>
+
             <section className="_secPortfolio" id="portfolio">
               <ProjectOne ativo={isProjectOne} setAtivo={setIsProjectOne} />
               <ProjectTwo ativo={isProjectTwo} setAtivo={setIsProjectTwo} />
               <ProjectThree ativo={isProjectThree} setAtivo={setIsProjectThree} />
+
               <h2>Portfólio</h2>
               <div className="sobre-nos-container">
                 <img src={Portifolio} alt="Sobre Nós" className="sobre-nos-image" />
               </div>
+
               <div className="portfolio-list">
                 <div
                   className="portfolio-item"
@@ -337,27 +367,36 @@ function Home() {
                 </div>
               </div>
             </section>
-            <section className="_secTestimonials" id="testimonials">
+
+            {/* <section className="_secTestimonials" id="testimonials">
               <h2>Depoimentos</h2>
               <div className="sobre-nos-container">
                 <img src={Depoimentos} alt="Sobre Nós" className="sobre-nos-image" />
               </div>
               <div className="testimonials-list">
                 <div className="testimonial-item">
-                  <p> A Genius In Tech transformou a maneira como operamos nosso negócio. A solução deles foi fundamental para nosso sucesso."</p>
+                  <div className="text-description">
+                    <p> A Genius In Tech transformou a maneira como operamos nosso negócio. A solução deles foi fundamental para nosso sucesso.</p>
+                  </div>
                   <p> Cliente - A Kamisaria Zanuto </p>
                 </div>
                 <div className="testimonial-item">
-                  <p> Excelente equipe, sempre inovando e entregando projetos de alta qualidade." </p>
+                  <div className="text-description">
+                    <p> Excelente equipe, sempre inovando e entregando projetos de alta qualidade. </p>
+                  </div>
                   <p> Cliente - B Cotovia</p>
                 </div>
                 <div className="testimonial-item">
-                  <p>Nosso sistema ficou muito mais eficiente graças à consultoria da Genius In Tech."</p>
+                  <div className="text-description">
+                    <p>Nosso sistema ficou muito mais eficiente graças à consultoria da Genius In Tech.</p>
+                  </div>
                   <p>Cliente - C  VLZM</p>
                 </div>
               </div>
-            </section>
+            </section> */}
+
           </main>
+
         </div>
       </div>
       <ContactPage />
