@@ -367,8 +367,7 @@ function Home() {
                 </div>
               </div>
             </section>
-
-            {/* <section className="_secTestimonials" id="testimonials">
+            <section className="_secTestimonials" id="testimonials">
               <h2>Depoimentos</h2>
               <div className="sobre-nos-container">
                 <img src={Depoimentos} alt="Sobre Nós" className="sobre-nos-image" />
@@ -378,22 +377,28 @@ function Home() {
                   <div className="text-description">
                     <p> A Genius In Tech transformou a maneira como operamos nosso negócio. A solução deles foi fundamental para nosso sucesso.</p>
                   </div>
-                  <p> Cliente - A Kamisaria Zanuto </p>
+                  <div className="text-description _textClient">
+                    <p> Cliente - A Kamisaria</p>
+                  </div>
                 </div>
                 <div className="testimonial-item">
                   <div className="text-description">
                     <p> Excelente equipe, sempre inovando e entregando projetos de alta qualidade. </p>
                   </div>
-                  <p> Cliente - B Cotovia</p>
+                  <div className="text-description _textClient">
+                    <p> Cliente - B Cotovia</p>
+                  </div>
                 </div>
                 <div className="testimonial-item">
                   <div className="text-description">
                     <p>Nosso sistema ficou muito mais eficiente graças à consultoria da Genius In Tech.</p>
                   </div>
-                  <p>Cliente - C  VLZM</p>
+                  <div className="text-description _textClient">
+                    <p>Cliente - C  VLZM</p>
+                  </div>
                 </div>
               </div>
-            </section> */}
+            </section>
 
           </main>
 

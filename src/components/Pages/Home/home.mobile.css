@@ -283,6 +283,50 @@
     .portfolio-item p:nth-child(3) {
         font-size: 0.5rem;
     }
+    ._secTestimonials h2 {
+        font-size: 1.2rem;
+        margin: 5px;
+    }
+    .testimonials-list {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        gap: 0;
+    }
+    ._textClient p {    
+        display: flex;  
+        align-items: center;
+        justify-content: center;
+        font-size: 0.3em !important;        
+    }   
+    .testimonial-item {
+        margin: 0;
+        padding: 0;
+        margin-left: 5px;
+        margin-right: 5px;
+    }     
+    .text-description {             
+        margin: 0;
+        padding: 0;
+    }
+    .text-description p {
+        display: flex;
+        font-size: 0.4em;
+        text-align: justify;
+        margin: 0;
+        padding: 10px;
+    }   
+    .testimonial-item p::before {
+        content: "“";
+        font-size: 1.2em;
+        color: #ff7f50;
+      }
+      .testimonial-item p::after {
+        content: "”";
+        font-size: 1em;
+        color: #ff7f50;
+        margin-left: 5px;
+      }
     .Footer {
         margin: 0;
     }
@@ -291,7 +335,6 @@
         margin: 0;
         padding: 0;
     }
-
     .Footer-contact {
         margin: 0;
         padding: 0;
@@ -349,22 +392,10 @@
     }
     article input::placeholder {
         font-size: 0.6rem !important;
-    }
-
-    
+    }    
     .Footer-copyright p {
         font-size: 0.5em;
         margin: 0;
     }
-
-   
-
-
-    
-
-
-
-
-
   }
  
