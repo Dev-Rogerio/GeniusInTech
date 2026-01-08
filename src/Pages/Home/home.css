@@ -1,14 +1,14 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 :root {
-  --main-blue: #0B1F32;  
-  --main-yellow: #E7B628; 
-  --main-gray: #f0f0f0;   
-  --main-dark-gray: #4f4f4f; 
-  --main-white: #ffffff;   
+  --main-blue: #0b1f32;
+  --main-yellow: #e7b628;
+  --main-gray: #f0f0f0;
+  --main-dark-gray: #4f4f4f;
+  --main-white: #ffffff;
 }
 html {
   scroll-behavior: smooth;
@@ -20,7 +20,7 @@ html {
   margin: 0;
 }
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: var(--text-color);
   background-color: var(--background-color);
 }
@@ -30,7 +30,7 @@ body {
   min-height: 100vh;
 }
 .content-wrap {
-  flex: 1; 
+  flex: 1;
 }
 .menu-toggle {
   /* display: none; */
@@ -42,34 +42,33 @@ body {
   margin: 3px 0;
   transition: all 0.3s ease;
 }
-nav {  
+nav {
   background-color: #0b1f32;
   padding: 10px 0;
-  margin: 0;  
+  margin: 0;
   width: 100%;
- z-index: 1;
-} 
+  z-index: 1;
+}
 nav ul {
   display: flex;
   list-style-type: none;
   padding: 0;
   margin: 0;
   justify-content: space-around;
-  
 }
 
 nav ul li {
-  display: inline-block; 
-  margin-right:  15px;
-} 
+  display: inline-block;
+  margin-right: 15px;
+}
 nav ul li a {
   text-decoration: none;
   color: white;
   font-weight: 600;
-  text-transform: uppercase;  
+  text-transform: uppercase;
   transition: color 0.3s;
   padding: 10px;
-  transition: color 0.3s; 
+  transition: color 0.3s;
 }
 nav ul li a:hover {
   color: var(--secondary-color);
@@ -80,22 +79,22 @@ nav ul li a:hover {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1; 
+  z-index: -1;
   opacity: 0.2;
   background-size: cover;
   background-position: center;
 }
-header {  
- display: flex;
- height: 250px;
- justify-content: center;
- align-items: center;  
- color: white;
- text-align: center;
- padding: 20px;
- box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
- position: relative; 
- z-index: 1;
+header {
+  display: flex;
+  height: 250px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
 }
 .logoBlack {
   padding: 5px;
@@ -103,8 +102,8 @@ header {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 20%;  
-} 
+  height: 20%;
+}
 .menu-togle {
   display: none;
   margin-left: 90%;
@@ -112,7 +111,6 @@ header {
 }
 ._header {
   background-color: var(--main-yellow);
-
 }
 ._secLogo {
   width: 100%;
@@ -127,72 +125,73 @@ header {
   padding: 20px;
   width: 100%vh;
   margin-top: 1px;
-   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4), -10px -3px 40px rgba(255, 255, 255, 0.6);
-  z-index: 10; 
- } 
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4),
+    -10px -3px 40px rgba(255, 255, 255, 0.6);
+  z-index: 10;
+}
 ._secLogo img {
   width: 150px;
   border-radius: 10%;
-  width: 200px; 
+  width: 200px;
   height: auto;
-  animation: zoomIn 1.5s ease-in-out forwards; 
-} 
+  animation: zoomIn 1.5s ease-in-out forwards;
+}
 .logo:hover img {
   transform: scale(1.1);
   transition: transform 0.5s ease-in-out;
-} 
-main {  
+}
+main {
   flex-direction: column;
   margin-left: 50%;
   transform: translate(-50%);
   width: 90%;
   margin-top: 50px;
   z-index: 1;
- } 
+}
 ._secHome,
-._secSobreNos, 
-._secMissao, 
+._secSobreNos,
+._secMissao,
 ._secVisao,
 ._secServicos,
 ._secValores,
 ._secContato,
 ._secPortfolio,
-._secTestimonials
- {
+._secTestimonials {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100%; 
+  height: 100%;
   background-color: var(--background-color);
-  padding: 20px; 
-  border-radius: 4px; 
-   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4), -10px -3px 40px rgba(255, 255, 255, 0.6);
-     margin-top: 25px;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4),
+    -10px -3px 40px rgba(255, 255, 255, 0.6);
+  margin-top: 25px;
 }
-._secHome h2, 
-._secSobreNos h2, 
-._secMissao h2, 
-._secVisao h2, 
-._secValores h2, 
+._secHome h2,
+._secSobreNos h2,
+._secMissao h2,
+._secVisao h2,
+._secValores h2,
 ._secServicos h2,
 ._secContato h2,
 ._secPortfolio h2,
 ._secTestimonials h2 {
   font-size: 2.5rem;
-  font-size: 2.5rem; 
+  font-size: 2.5rem;
   margin-bottom: 10px;
   text-align: center;
-  font-family: 'Montserrat', sans-serif; 
-  color: var(--main-blue); 
+  font-family: "Montserrat", sans-serif;
+  color: var(--main-blue);
   margin-bottom: 40px;
   text-transform: uppercase;
 }
 .text-description {
   width: 100%;
   height: 60%;
-  text-align: justify;   
+  text-align: justify;
 }
 .testimonials-list {
   display: flex;
@@ -248,45 +247,43 @@ main {
   color: var(--main-yellow);
 }
 ._secHome h1,
-._secSobreNos h1, 
-._secMissao h1, 
+._secSobreNos h1,
+._secMissao h1,
 ._secVisao h1,
 ._secValores h1,
 ._secServicos h1,
 ._secContato h1,
-._secPortfolio h1
-{
+._secPortfolio h1 {
   font-size: 3rem;
   margin-bottom: 20px;
-  color: #333; 
-} 
-._secHome p, 
-._secSobreNos p, 
-._secMissao p, 
+  color: #333;
+}
+._secHome p,
+._secSobreNos p,
+._secMissao p,
 ._secVisao p,
 ._secValores p,
 ._secServicos p,
 ._secContato p,
-._secPortfolio p
-{
+._secPortfolio p {
   font-size: 1.5rem;
   color: #555;
   margin-bottom: 30px;
-  text-align: justify; 
+  text-align: justify;
 }
 .textP {
   max-width: 100%;
 }
 .sobre-nos-container {
-  display: flex;  
-  width: 100%; 
+  display: flex;
+  width: 100%;
 }
 .sobre-nos-container img {
   display: flex;
   margin-left: 50%;
   transform: translate(-50%);
   max-width: 50%;
-  border-radius: 10px; 
+  border-radius: 10px;
   margin-bottom: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -300,7 +297,7 @@ main {
 ._secContato article label {
   font-size: 1.2rem;
   margin-bottom: 8px;
-  display: block;  
+  display: block;
   color: var(--accent-color);
 }
 ._secContato article {
@@ -308,7 +305,7 @@ main {
 }
 ._secContato input,
 ._secContato textarea {
-  width: 100%;  
+  width: 100%;
   height: 35px;
   font-size: 16px;
   color: #333;
@@ -317,22 +314,22 @@ main {
   border: 1px solid #ccc;
   border-radius: 4px;
   border-radius: 5px;
-  transition: border-color 0.3s;  
+  transition: border-color 0.3s;
   padding: 10px;
-  text-indent: 10px;  
+  text-indent: 10px;
 }
 ._secContato input:focus,
 ._secContato textarea:focus {
-  border-color: #008080; 
+  border-color: #008080;
   outline: none;
 }
-._secContato textarea { 
+._secContato textarea {
   height: 120px;
   resize: vertical;
   background-color: #b0bec5;
 }
-._secContato article button {  
-  color: white;  
+._secContato article button {
+  color: white;
   transition: background-color 0.3s;
   padding: 10px 20px;
   border: none;
@@ -361,16 +358,18 @@ main {
   align-items: center;
   margin-top: 20px;
 }
-button, .cta-button {
-  background-color: var(--main-yellow); 
-  color: var(--main-blue); 
+button,
+.cta-button {
+  background-color: var(--main-yellow);
+  color: var(--main-blue);
   border: none;
   padding: 10px 20px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-button:hover, .cta-button:hover {
+button:hover,
+.cta-button:hover {
   background-color: var(--main-blue);
   color: var(--main-yellow);
 }
@@ -387,7 +386,7 @@ button:hover, .cta-button:hover {
 .cta-button:hover {
   background-color: var(--main-yellow);
 }
-.cta-button {  
+.cta-button {
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -399,8 +398,8 @@ button:hover, .cta-button:hover {
   text-decoration: none;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
-.cta-button:hover { 
-  transform: scale(1.05); 
+.cta-button:hover {
+  transform: scale(1.05);
   color: white;
   background-color: var(--main-yellow);
 }
@@ -415,26 +414,25 @@ button.video-button {
 .video-button:hover {
   background-color: #218838;
   color: white;
-} 
+}
 
- ._secValores ul {
-  list-style: none; 
-  padding-left: 0;  
+._secValores ul {
+  list-style: none;
+  padding-left: 0;
   width: 30%;
   height: 230px;
-} 
+}
 ._secValores ul li {
   font-size: 1.8rem;
   text-align: justify;
   margin: 10px 0;
-} 
+}
 ._secValores ul li::before {
-  content: '✔';
+  content: "✔";
   font-size: 20px;
-  color: #E7B628;
+  color: #e7b628;
   margin-right: 10px;
-} 
-
+}
 
 .Footer {
   background-color: var(--main-blue);
@@ -449,11 +447,11 @@ button.video-button {
   flex-wrap: wrap;
   gap: 20px;
 }
-.Footer-contact, 
-.Footer-links, 
-.Footer-social, 
+.Footer-contact,
+.Footer-links,
+.Footer-social,
 .Footer-newsletter {
-  margin: 10px;  
+  margin: 10px;
 }
 .Footer-contact h4 {
   color: #e7b628;
@@ -464,9 +462,9 @@ button.video-button {
   font-family: Helvetica, sans-serif;
   letter-spacing: 0.5px;
   font-weight: 400;
-  line-height: 1.5; 
-  margin: 8px 0; 
-  line-height: 1.5; 
+  line-height: 1.5;
+  margin: 8px 0;
+  line-height: 1.5;
 }
 .Footer-links ul {
   list-style-type: disc;
@@ -479,17 +477,17 @@ button.video-button {
   color: #ccc;
 }
 .Footer-links h4 {
-  color: #E7B628;
+  color: #e7b628;
 }
 .Footer-links a {
   font-size: 12px;
   font-family: Helvetica, sans-serif;
   letter-spacing: 0.5px;
   font-weight: 400;
-  line-height: 1.5;   
+  line-height: 1.5;
 }
 .Footer-social h4 {
-  color: #e7b628;  
+  color: #e7b628;
 }
 .Footer-social a {
   display: block;
@@ -497,20 +495,20 @@ button.video-button {
   font-family: Helvetica, sans-serif;
   letter-spacing: 0.5px;
   font-weight: 400;
-  line-height: 1.5;  
-  }
-  .Footer-social a[href*="facebook"] {
-    color: #ccc; 
-  }  
-  .Footer-social a[href*="linkedin"] {
-    color: #ccc; 
-  }  
-  .Footer-social a[href*="instagram"] {
-    color: #ccc; 
-  }  
-  .Footer-social a:hover {
-    opacity: 0.8;
-  }  
+  line-height: 1.5;
+}
+.Footer-social a[href*="facebook"] {
+  color: #ccc;
+}
+.Footer-social a[href*="linkedin"] {
+  color: #ccc;
+}
+.Footer-social a[href*="instagram"] {
+  color: #ccc;
+}
+.Footer-social a:hover {
+  opacity: 0.8;
+}
 .Footer a {
   color: #fff;
   text-decoration: none;
@@ -518,7 +516,7 @@ button.video-button {
 .Footer-newsletter {
   flex: 1;
   padding: 10px;
-  width: 100%;  
+  width: 100%;
   font-size: 1.8rem;
 }
 .Footer-newsletter h4 {
@@ -530,27 +528,27 @@ button.video-button {
   margin-top: 10px;
 }
 .Footer-newsletter input {
-  width: 70%; 
+  width: 70%;
   outline: none;
-  font-size: 16px; 
-  padding: 10px; 
-  border: 1px solid #cccccc; 
-  border-radius: 5px; 
-  width: 100%; 
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  width: 100%;
   height: 35px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   padding: 10px;
   border: none;
 }
 .Footer-newsletter input::placeholder {
-  font-size: 16px; 
-  color: #888888; 
-  opacity: 1; 
+  font-size: 16px;
+  color: #888888;
+  opacity: 1;
 }
 .Footer-newsletter button {
   width: 170px;
   border: 1px solid gray;
-  border-radius: 3px; 
+  border-radius: 3px;
 }
 .Footer a:hover {
   text-decoration: underline;
@@ -569,26 +567,26 @@ button.video-button {
   border-radius: 4px;
 }
 .portfolio-item:hover {
-  transform: scale(1.05); 
-  background-color: var(--main-yellow);  
+  transform: scale(1.05);
+  background-color: var(--main-yellow);
 }
 .portfolio-item h3 {
-  color: #E7B628;
+  color: #e7b628;
   font-size: 32px;
 }
 .portfolio-item:hover h3 {
-  color: #0b1f32; 
+  color: #0b1f32;
 }
 .portfolio-item p::after {
-  content: saiba mais⬎ ;
- } 
-.portfolio-item p:nth-child(3) {  
- display: flex;
+  content: saiba mais⬎;
+}
+.portfolio-item p:nth-child(3) {
+  display: flex;
   font-size: 15px;
   color: #0b1f32;
-  margin-top: 20px;  
+  margin-top: 20px;
   cursor: pointer;
-  color: #007bff ;
+  color: #007bff;
 }
 .portfolio-list {
   display: flex;
@@ -637,10 +635,10 @@ button.cta-button {
 }
 button.cta-button:hover {
   background-color: var(--main-yellow);
-  color: var(--main-blue)
+  color: var(--main-blue);
 }
 ._secHome {
-  background-image: url('../../../assets/fundotransparent.png'); 
+  background-image: url("../../assets/fundotransparent.png");
   background-size: cover;
   padding: 100px 20px;
   text-align: center;
@@ -668,11 +666,11 @@ button.cta-button:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1001; 
+  z-index: 1001;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 .video-container {
   display: flex;
@@ -690,7 +688,7 @@ button.cta-button:hover {
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
-  z-index: 1002; 
+  z-index: 1002;
 }
 .close-video:hover {
   background-color: #e04b4b;
@@ -701,24 +699,24 @@ button.cta-button:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7); 
+  background: rgba(0, 0, 0, 0.7);
   z-index: 1000;
 }
 body.modal-open {
   overflow: hidden;
 }
-.Footer-contact, 
-.Footer-links, 
+.Footer-contact,
+.Footer-links,
 .Footer-social {
   flex: 1;
   padding: 20px;
   min-width: 200px;
   font-size: 1.8rem;
 }
-.Footer-newsletter article{
+.Footer-newsletter article {
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   gap: 10px;
 }
 .Footer-links ul {
@@ -739,7 +737,7 @@ body.modal-open {
 }
 .Footer-social a {
   display: block;
-  margin: 8px 0; 
+  margin: 8px 0;
   color: white;
   font-size: 1rem;
 }
@@ -774,17 +772,17 @@ section {
   color: #ccc;
   text-align: center;
 }
-._secContatoBox  {
-  background-color: #ccc; 
+._secContatoBox {
+  background-color: #ccc;
   padding: 40px 20px;
   text-align: center;
   border-radius: 8px;
   max-width: 800px;
   margin: 0 auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 ._secContato h1 {
-  color: #333; 
+  color: #333;
   font-size: 32px;
   margin-bottom: 20px;
   line-height: 1.2;
@@ -816,7 +814,7 @@ section {
 }
 ._secContato input:focus,
 ._secContato textarea:focus {
-  border-color: #0d6efd; 
+  border-color: #0d6efd;
   outline: none;
 }
 ._secContato button {
@@ -831,5 +829,5 @@ section {
   transition: background-color 0.3s;
 }
 ._secContato button:hover {
-  background-color: #084298; 
+  background-color: #084298;
 }

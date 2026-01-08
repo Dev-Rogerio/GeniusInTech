@@ -1,0 +1,279 @@
+:root {
+  --cta-primary: #facc15;
+  --blue-primary: #38bdf8; /* azul claro moderno */
+  --blue-hover: #0ea5e9;
+
+  --dark-900: #020617;
+  --dark-800: #020617;
+  --dark-700: #0f172a;
+
+  --text-title: #f8fafc;
+  --text-body: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --card-bg: #ffffff;
+  --card-text: #0f172a;
+}
+/* ===== FUNDO ===== */
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--dark-900);
+  font-family: "Poppins", sans-serif;
+  color: var(--text-body);
+}
+
+.lp-root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* ===== HERO ===== */
+.lp-hero {
+  background: linear-gradient(155deg, #38bdf8, #273c6d);
+  color: #f9f9f9;
+  text-align: center;
+  padding: 100px 20px 80px;
+  border-radius: 0 0 20px 20px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1s ease;
+  isolation: isolate; /* 🔑 evita conflitos de camadas */
+}
+
+/* garante que TODO conteúdo fique acima do ::before */
+.lp-hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* efeito visual de fundo */
+.lp-hero::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(
+      circle at 30% 30%,
+      rgba(243, 2, 2, 0.03),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 70%,
+      rgba(255, 255, 255, 0.03),
+      transparent 50%
+    );
+  filter: blur(120px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===== LOGO ===== */
+.lp-logo {
+  display: block;
+  margin: -40px auto 30px;
+  max-width: 180px;
+  height: auto;
+}
+
+/* ===== TEXTO HERO ===== */
+.lp-hero h1 {
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.3;
+  color: #111;
+}
+
+.lp-hero p {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+/* ===== BOTÃO CTA ===== */
+.lp-btn {
+  background: linear-gradient(135deg, var(cta-primary));
+  color: #fff;
+  padding: 20px 40px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.lp-btn:hover {
+  background: #187bcd;
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* ===== SEÇÕES ===== */
+.lp-section {
+  text-align: center;
+  margin: 50px auto;
+  max-width: 1000px;
+  padding: 60px 20px;
+  border-radius: 15px;
+  /* background: linear-gradient(135deg, #1f1f1f, #2a2a2a); */
+  background: linear-gradient(135deg, var(--blue-primary), var(--blue-hover));
+  color: #f9f9f9;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: lpFadeInUp 0.8s ease both;
+}
+
+.lp-section h2 {
+  font-size: 2rem;
+  margin-bottom: 14px;
+  color: var(--text-title);
+}
+.lp-section p {
+  color: var(--text-body);
+  font-size: 1.05rem;
+}
+/* ===== GRID ===== */
+.lp-grid {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+/* ===== CARDS ===== */
+.lp-card {
+  background: linear-gradient(145deg, #f0f0f0, #d9d9d9);
+  padding: 30px;
+  border-radius: 15px;
+  flex: 1 1 250px;
+  max-width: 300px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  color: #111;
+}
+
+.lp-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+.lp-card p {
+  color: #334155;
+}
+.lp-card h3 {
+  margin-bottom: 12px;
+  color: var(--blue-hover);
+}
+
+/* ===== PROVA SOCIAL ===== */
+.lp-testimonial {
+  background: linear-gradient(145deg, #f0f0f0, #d9d9d9);
+  padding: 25px 30px;
+  border-radius: 15px;
+  flex: 1 1 250px;
+  max-width: 300px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  color: #111;
+}
+
+.lp-testimonial:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.lp-testimonial span {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* ===== FORM ===== */
+.lp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.lp-form input,
+.lp-form textarea {
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #999;
+  background: #ccc;
+  color: #111;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.lp-form input:focus,
+.lp-form textarea:focus {
+  border-color: #1e90ff;
+  box-shadow: 0 0 8px rgba(30, 144, 255, 0.3);
+  outline: none;
+}
+
+/* ===== WHATSAPP FIXO ===== */
+.lp-whatsapp-fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25d366;
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.lp-whatsapp-fixed:hover {
+  background: #1ebe5d;
+  transform: scale(1.1);
+}
+
+/* ===== FOOTER ===== */
+.lp-footer {
+  background: var(--blue-primary);
+  color: var(--card-text);
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  margin-top: 50px;
+  border-radius: 10px 10px 0 0;
+}
+
+/* ===== ANIMAÇÃO ===== */
+@keyframes lpFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+  .lp-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .lp-hero h1 {
+    font-size: 2rem;
+  }
+}
+.lp-root,
+.lp-hero,
+.lp-section {
+  opacity: 1 !important;
+  visibility: visible !important;
+}

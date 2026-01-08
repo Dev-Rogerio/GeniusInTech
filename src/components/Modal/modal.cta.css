@@ -1,0 +1,342 @@
+/* =====================================================
+   OVERLAY
+===================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 20, 0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+.modal-container {
+  background: linear-gradient(180deg, #ffffff, #f6f9fc);
+  width: 100%;
+  max-width: 460px;
+  max-height: 90vh;
+  padding: 32px 28px;
+  border-radius: 22px;
+  position: relative;
+  overflow-y: auto;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.45);
+  animation: modalUp 0.35s ease;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Scrollbar elegante */
+.modal-container::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-container::-webkit-scrollbar-thumb {
+  background: #1e90ff;
+  border-radius: 10px;
+}
+
+/* =====================================================
+   BOTÃO FECHAR
+===================================================== */
+.modal-close {
+  display: flex;
+  position: fixed;
+  top: 12px;
+  margin-right: 30px;
+  right: 18px;
+  font-size: 28px;
+  border: none;
+  background: none;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  color: #555;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, opacity 0.25s ease, color 0.25s ease;
+  z-index: 10001;
+}
+
+.modal-close:hover {
+  color: #e11d48;
+  background-color: transparent;
+  color: red;
+  transform: scale(1.25);
+  opacity: 0.8;
+}
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+.modal-container h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1e90ff;
+  text-align: center;
+  margin-bottom: 12px;
+  margin-top: 18px;
+}
+
+/* =====================================================
+   FAIXA DE DESTAQUE (DESCRIÇÃO)
+===================================================== */
+.modal-container > p {
+  background: linear-gradient(135deg, #facc02, #f7fbff);
+  border-left: 4px solid #1e90ff;
+  padding: 14px 16px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #1e3a5f;
+  font-weight: 600;
+  margin-bottom: 26px;
+}
+
+/* =====================================================
+   BLOCO DE PREÇO / OFERTA
+===================================================== */
+
+/* ===== BLOCO DE PREÇO PROFISSIONAL ===== */
+/* ===== BLOCO DE PREÇO ANIMADO ===== */
+.modal-price-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #facc02, #fff4b8);
+  border-left: 5px solid #1e90ff;
+  border-radius: 16px;
+  margin-bottom: 26px;
+  padding: 18px 20px;
+  /* animação de entrada */
+  animation: priceFadeUp 0.6s ease forwards;
+  transform: translateY(10px);
+  opacity: 0;
+  margin-bottom: 26px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== ÍCONE ===== */
+.price-icon {
+  background: #fff1d6;
+  color: #7a4a2e;
+  width: 48px;
+  height: 42px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  animation: iconPop 0.6s ease 0.2s forwards;
+  transform: scale(0.8);
+  opacity: 0;
+}
+
+/* ===== TEXTO ===== */
+.price-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.15;
+  align-items: center;
+  text-align: center;
+}
+
+.modal-price-note {
+  font-size: 0.8rem;
+  color: #444;
+  text-align: center;
+  margin-top: 14px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.15);
+  padding-top: 8px;
+}
+
+.modal-cta-hint {
+  margin-bottom: 2px;
+  margin-top: 10px;
+  font-size: 0.78rem;
+  text-align: center;
+  color: #333;
+  letter-spacing: 0.2px;
+  padding: 0;
+  margin-top: 20px 0 0 0;
+}
+
+.price-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #1e3a5f;
+  margin: 0;
+}
+
+.price-value {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #111;
+  margin: 2px 0;
+  animation: pricePulse 1.6s ease-in-out infinite;
+}
+
+.price-subtitle {
+  font-size: 0.75rem;
+  color: #444;
+}
+
+/* ===== HOVER (DESKTOP) ===== */
+@media (hover: hover) {
+  .modal-price-info:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 10px 30px rgba(30, 144, 255, 0.25);
+    transition: all 0.3s ease;
+  }
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes priceFadeUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes iconPop {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pricePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* =====================================================
+   LISTA DE BENEFÍCIOS
+===================================================== */
+.modal-includes h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #111;
+}
+
+.modal-includes ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.modal-includes li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Check azul */
+.modal-includes li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #1e90ff;
+  font-weight: 900;
+}
+
+/* =====================================================
+   FORMULÁRIO
+===================================================== */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.modal-form input {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+}
+
+.modal-form input:focus {
+  outline: none;
+  border-color: #1e90ff;
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.25);
+}
+
+/* =====================================================
+   BOTÃO CTA
+===================================================== */
+.modal-btn {
+  margin-top: 0;
+  border-radius: 18px;
+  border: none;
+  background: linear-gradient(135deg, #25d366, #1ebe5d);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+}
+
+.modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.45);
+}
+
+/* =====================================================
+   TEXTO FINAL
+===================================================== */
+.lp-price-hint {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: #666;
+  text-align: center;
+}
+
+/* =====================================================
+   ANIMAÇÃO
+===================================================== */
+@keyframes modalUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+@media (max-width: 480px) {
+  .modal-container {
+    margin: 0 14px;
+    padding: 26px 22px;
+  }
+
+  .modal-container h2 {
+    font-size: 1.4rem;
+  }
+}

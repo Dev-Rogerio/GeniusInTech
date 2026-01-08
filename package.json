@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^8.1.0",
     "@emailjs/browser": "^4.4.1",
     "axios": "^1.7.7",
     "body-parser": "^1.20.3",
@@ -26,12 +27,26 @@
     "react-icons": "^5.3.0",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.26.1",
-    "stream-http": "^3.2.0"
+    "react-scripts": "^5.0.1",
+    "stream-http": "^3.2.0",
+    "web-vitals": "^5.1.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.25.7",
     "eslint-plugin-react": "^7.37.1",
     "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

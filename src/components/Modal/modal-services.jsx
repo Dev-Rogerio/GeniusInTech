@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import '../Home/modal-services.css';
+import "../Modal/modal-services.css";
 
 const Services = ({ showModalServices, setShowModalServices }) => {
   const handleCloseModal = () => {
@@ -11,9 +11,14 @@ const Services = ({ showModalServices, setShowModalServices }) => {
     <>
       <div className="modal">
         <div className="modal-content">
-          <span className="close-button" onClick={handleCloseModal}>&times;</span>
+          <span className="close-button" onClick={handleCloseModal}>
+            &times;
+          </span>
           <h2>Nossos Serviços</h2>
-          <p>Oferecemos uma gama de serviços inovadores para impulsionar sua empresa:</p>
+          <p>
+            Oferecemos uma gama de serviços inovadores para impulsionar sua
+            empresa:
+          </p>
           <ul>
             <li>Desenvolvimento de Software sob medida</li>
             <li>Consultoria em Tecnologia</li>
