@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../components/Modal/modal.cta.css";
-import { db } from "../../../src/firebase";
-import { collection, addDoc } from "firebase/firestore";
+// import { db } from "../../../src/firebase";
+// import { collection, addDoc } from "firebase/firestore";
 import CampaignCountdown from "../CampaignCountdown";
-import { sendLead } from "../../services/sendLead";
+// import { sendLead } from "../../services/sendLead";
 
 function ModalCTA({ isOpen, onClose, onSubmit }) {
   const [name, setName] = useState("");
@@ -60,6 +60,45 @@ function ModalCTA({ isOpen, onClose, onSubmit }) {
   //     setLoading(false);
   //   }
   // };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!name || !email || !phone) {
+  //     alert("Preencha todos os campos!");
+  //     return;
+  //   }
+
+  //   setLoading(true);
+
+  //   try {
+  //     // 🔹 1. Salva no Firebase
+  //     await addDoc(collection(db, "leads_landingpage"), {
+  //       name,
+  //       email,
+  //       phone,
+  //       timestamp: new Date(),
+  //     });
+
+  //     // 🔹 2. Envia email via Netlify Function
+  //     await sendLead({
+  //       name,
+  //       email,
+  //       message: `Telefone: ${phone}`,
+  //     });
+
+  //     alert("Obrigado! Seus dados foram enviados.");
+  //     setName("");
+  //     setEmail("");
+  //     setPhone("");
+  //     onClose();
+  //   } catch (error) {
+  //     console.error("Erro ao enviar lead:", error);
+  //     alert("Houve um erro, tente novamente.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -71,19 +110,14 @@ function ModalCTA({ isOpen, onClose, onSubmit }) {
     setLoading(true);
 
     try {
-      // 🔹 1. Salva no Firebase
-      await addDoc(collection(db, "leads_landingpage"), {
-        name,
-        email,
-        phone,
-        timestamp: new Date(),
-      });
-
-      // 🔹 2. Envia email via Netlify Function
-      await sendLead({
-        name,
-        email,
-        message: `Telefone: ${phone}`,
+      await fetch("/.netlify/functions/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+        }),
       });
 
       alert("Obrigado! Seus dados foram enviados.");
