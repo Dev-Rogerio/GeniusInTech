@@ -1,85 +1,53 @@
-import admin from "firebase-admin";
-import sgMail from "@sendgrid/mail";
+const sgMail = require("@sendgrid/mail");
 
-// 🔐 Firebase Admin
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert(
-      JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
-    ),
-  });
-}
-
-const db = admin.firestore();
-
-// 📧 SendGrid
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-export async function handler(event) {
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "Method Not Allowed" }),
-    };
-  }
-
-  let data;
+exports.handler = async (event) => {
+  const jsonResponse = (statusCode, payload) => ({
+    statusCode,
+    body: JSON.stringify(payload),
+  });
 
   try {
-    data = JSON.parse(event.body);
-  } catch {
-    return {
-      statusCode: 400,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "JSON inválido" }),
-    };
-  }
+    // ❌ Bloqueia acesso via navegador (GET)
+    if (event.httpMethod !== "POST") {
+      return jsonResponse(405, {
+        error: "Method Not Allowed. Use POST.",
+      });
+    }
 
-  const { name, email, phone } = data;
+    // ❌ Proteção contra body vazio
+    if (!event.body) {
+      return jsonResponse(400, {
+        error: "Request body is required",
+      });
+    }
 
-  if (!name || !email || !phone) {
-    return {
-      statusCode: 400,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "Campos obrigatórios ausentes" }),
-    };
-  }
+    const { name, email, phone } = JSON.parse(event.body);
 
-  try {
-    // 🔥 Firestore
-    await db.collection("leads_landingpage").add({
-      name,
-      email,
-      phone,
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      source: "landing-prod",
-    });
+    if (!name || !email || !phone) {
+      return jsonResponse(400, { error: "Missing fields" });
+    }
 
-    // 📧 Email
     await sgMail.send({
       to: process.env.LEAD_RECEIVER_EMAIL,
-      from: process.env.SENDGRID_FROM_EMAIL, // ⚠️ domínio verificado
-      subject: "Novo lead - Landing Page",
-      text: `
-Nome: ${name}
-Email: ${email}
-Telefone: ${phone}
+      from: {
+        email: process.env.SENDGRID_FROM_EMAIL,
+        name: "Genius In Tech",
+      },
+      replyTo: email,
+      subject: "🔥 Novo Lead - Landing Page",
+      html: `
+        <h2>Novo Lead Recebido</h2>
+        <p><strong>Nome:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Telefone:</strong> ${phone}</p>
       `,
     });
 
-    return {
-      statusCode: 200,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ success: true }),
-    };
+    return jsonResponse(200, { success: true });
   } catch (err) {
-    console.error("Erro Function:", err);
-
-    return {
-      statusCode: 500,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "Erro ao processar lead" }),
-    };
+    console.error("❌ SendGrid error:", err);
+    return jsonResponse(500, { error: "Internal Server Error" });
   }
-}
+};
