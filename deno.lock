@@ -21,6 +21,7 @@
         "npm:emailjs-com@^3.2.0",
         "npm:eslint-plugin-react@^7.37.1",
         "npm:express@^4.21.0",
+        "npm:firebase-admin@^13.6.0",
         "npm:firebase@^10.13.1",
         "npm:https-browserify@1",
         "npm:nodemailer@^6.9.15",
