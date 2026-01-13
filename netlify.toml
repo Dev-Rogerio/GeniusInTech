@@ -5,10 +5,6 @@
 
 [dev]
   command = "npm start"
-  port = 8888
   targetPort = 3000
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  port = 8888
+  functions = "netlify/functions"
