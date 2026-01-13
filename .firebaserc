@@ -1,8 +1,0 @@
-{
-  "projects": {
-    "default": "geniusintech-production",
-    "prod": "geniusintech-production"
-  },
-  "targets": {},
-  "etags": {}
-}

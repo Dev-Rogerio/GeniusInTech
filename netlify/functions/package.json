@@ -1,14 +1,5 @@
 {
-  "name": "functions",
-  "version": "1.0.0",
-  "description": "",
-  "main": "leads.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "name": "netlify-functions",
   "type": "commonjs",
   "dependencies": {
     "@sendgrid/mail": "^8.1.6"
