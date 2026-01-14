@@ -99,6 +99,40 @@ function ModalCTA({ isOpen, onClose, onSubmit }) {
   //   }
   // };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!name || !email || !phone) {
+  //     alert("Preencha todos os campos!");
+  //     return;
+  //   }
+
+  //   setLoading(true);
+
+  //   try {
+  //     await fetch("/.netlify/functions/leads", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({
+  //         name,
+  //         email,
+  //         phone,
+  //       }),
+  //     });
+
+  //     alert("Obrigado! Seus dados foram enviados.");
+  //     setName("");
+  //     setEmail("");
+  //     setPhone("");
+  //     onClose();
+  //   } catch (error) {
+  //     console.error("Erro ao enviar lead:", error);
+  //     alert("Houve um erro, tente novamente.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -110,24 +144,28 @@ function ModalCTA({ isOpen, onClose, onSubmit }) {
     setLoading(true);
 
     try {
-      await fetch("/.netlify/functions/leads", {
+      const res = await fetch("/.netlify/functions/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-        }),
+        body: JSON.stringify({ name, email, phone }),
       });
 
-      alert("Obrigado! Seus dados foram enviados.");
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error("Erro da function:", data);
+        alert("Erro ao enviar lead. Verifique o console.");
+        return;
+      }
+
+      alert("Lead enviado com sucesso!");
       setName("");
       setEmail("");
       setPhone("");
       onClose();
     } catch (error) {
-      console.error("Erro ao enviar lead:", error);
-      alert("Houve um erro, tente novamente.");
+      console.error("Erro geral:", error);
+      alert("Falha de conexão com o servidor.");
     } finally {
       setLoading(false);
     }
