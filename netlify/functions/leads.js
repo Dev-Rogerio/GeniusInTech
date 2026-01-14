@@ -22,7 +22,10 @@ exports.handler = async function (event) {
 
     await sgMail.send({
       to: process.env.LEAD_RECEIVER_EMAIL,
-      from: process.env.SENDGRID_FROM_EMAIL,
+      from: {
+        email: process.env.SENDGRID_FROM_EMAIL,
+        name: "Genius In Tech",
+      },
       subject: "🚀 Novo Lead - Landing Page",
       text: `Nome: ${name}
 Email: ${email}
