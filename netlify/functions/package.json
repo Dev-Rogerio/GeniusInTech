@@ -1,7 +1,0 @@
-{
-  "name": "netlify-functions",
-  "type": "commonjs",
-  "dependencies": {
-    "@sendgrid/mail": "^8.1.6"
-  }
-}
