@@ -2,8 +2,21 @@ import admin from "firebase-admin";
 import sgMail from "@sendgrid/mail";
 import { google } from "googleapis";
 
+/* =========================
+   🌐 CORS
+========================= */
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
 let db;
 let sheets;
+
+/* =========================
+   🔐 Inicializações
+========================= */
 
 function initFirebase() {
   if (!admin.apps.length) {
@@ -35,9 +48,17 @@ function initGoogleSheets() {
   sheets = google.sheets({ version: "v4", auth });
 }
 
+/* =========================
+   🚀 HANDLER
+========================= */
+
 export async function handler(event) {
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 200, headers };
+  }
+
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return { statusCode: 405, headers, body: "Method Not Allowed" };
   }
 
   try {
@@ -46,6 +67,7 @@ export async function handler(event) {
     if (!name || !email || !phone) {
       return {
         statusCode: 400,
+        headers,
         body: JSON.stringify({ error: "Campos obrigatórios" }),
       };
     }
@@ -54,6 +76,7 @@ export async function handler(event) {
     initSendGrid();
     initGoogleSheets();
 
+    /* 🔥 Firestore */
     await db.collection("leads").add({
       name,
       email,
@@ -61,6 +84,7 @@ export async function handler(event) {
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
+    /* 📧 Email */
     if (process.env.LEAD_RECEIVER_EMAIL) {
       await sgMail.send({
         to: process.env.LEAD_RECEIVER_EMAIL,
@@ -70,6 +94,7 @@ export async function handler(event) {
       });
     }
 
+    /* 📊 Google Sheets */
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
       range: "Leads!A:G",
@@ -91,12 +116,14 @@ export async function handler(event) {
 
     return {
       statusCode: 200,
+      headers,
       body: JSON.stringify({ success: true }),
     };
   } catch (error) {
     console.error("Erro interno:", error);
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({ error: "Erro interno" }),
     };
   }
