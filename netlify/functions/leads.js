@@ -1,6 +1,6 @@
 import admin from "firebase-admin";
 import sgMail from "@sendgrid/mail";
-import { google } from "googleapis";
+// import { google } from "googleapis"; // ❌ DESATIVADO
 
 /* =========================
    🌐 CORS
@@ -12,7 +12,6 @@ const headers = {
 };
 
 let db;
-let sheets;
 
 /* =========================
    🔐 Inicializações
@@ -37,6 +36,7 @@ function initSendGrid() {
   }
 }
 
+/*
 function initGoogleSheets() {
   const auth = new google.auth.JWT(
     process.env.GOOGLE_CLIENT_EMAIL,
@@ -47,6 +47,7 @@ function initGoogleSheets() {
 
   sheets = google.sheets({ version: "v4", auth });
 }
+*/
 
 /* =========================
    🚀 HANDLER
@@ -61,7 +62,7 @@ export async function handler(event) {
     return {
       statusCode: 405,
       headers,
-      body: "Method Not Allowed",
+      body: JSON.stringify({ error: "Method Not Allowed" }),
     };
   }
 
@@ -79,9 +80,9 @@ export async function handler(event) {
     /* 🔐 Inicializa serviços */
     initFirebase();
     initSendGrid();
-    initGoogleSheets();
+    // initGoogleSheets(); // ❌ DESATIVADO
 
-    /* 🔥 Firestore (PRIMEIRO – nunca pode falhar) */
+    /* 🔥 Firestore (CRÍTICO – se falhar, retorna erro) */
     await db.collection("leads").add({
       name,
       email,
@@ -91,7 +92,6 @@ export async function handler(event) {
 
     /* =========================
        📧 Email (NÃO BLOQUEANTE)
-       👉 SE FALHAR, NÃO QUEBRA
     ========================= */
     if (
       process.env.SENDGRID_API_KEY &&
@@ -107,31 +107,34 @@ export async function handler(event) {
         });
       } catch (emailError) {
         console.error("Erro ao enviar email:", emailError);
-        // NÃO lança erro
+        // ❗ NÃO quebra o fluxo
       }
     }
 
     /* =========================
        📊 Google Sheets
+       ❌ TOTALMENTE DESATIVADO
     ========================= */
-    // await sheets.spreadsheets.values.append({
-    //   spreadsheetId: process.env.GOOGLE_SHEET_ID,
-    //   range: "Leads!A:G",
-    //   valueInputOption: "USER_ENTERED",
-    //   requestBody: {
-    //     values: [
-    //       [
-    //         new Date().toLocaleString("pt-BR"),
-    //         name,
-    //         email,
-    //         phone,
-    //         "Site",
-    //         "Novo",
-    //         "",
-    //       ],
-    //     ],
-    //   },
-    // });
+    /*
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: "Leads!A:G",
+      valueInputOption: "USER_ENTERED",
+      requestBody: {
+        values: [
+          [
+            new Date().toLocaleString("pt-BR"),
+            name,
+            email,
+            phone,
+            "Site",
+            "Novo",
+            "",
+          ],
+        ],
+      },
+    });
+    */
 
     return {
       statusCode: 200,
@@ -139,7 +142,7 @@ export async function handler(event) {
       body: JSON.stringify({ success: true }),
     };
   } catch (error) {
-    console.error("Erro interno:", error);
+    console.error("🔥 Erro interno:", error);
     return {
       statusCode: 500,
       headers,
