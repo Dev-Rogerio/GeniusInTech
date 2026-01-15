@@ -2,30 +2,46 @@ const admin = require("firebase-admin");
 const sgMail = require("@sendgrid/mail");
 const { google } = require("googleapis");
 
-// 🔐 Firebase Admin
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-    }),
-  });
+let db;
+let sheets;
+
+/* =========================
+   🔐 Inicializações Seguras
+========================= */
+
+function initFirebase() {
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+      }),
+    });
+  }
+  db = admin.firestore();
 }
-const db = admin.firestore();
 
-// 🔐 SendGrid
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+function initSendGrid() {
+  if (process.env.SENDGRID_API_KEY) {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  }
+}
 
-// 🔐 Google Sheets
-const auth = new google.auth.JWT(
-  process.env.GOOGLE_CLIENT_EMAIL,
-  null,
-  process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-  ["https://www.googleapis.com/auth/spreadsheets"]
-);
+function initGoogleSheets() {
+  const auth = new google.auth.JWT(
+    process.env.GOOGLE_CLIENT_EMAIL,
+    null,
+    process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+    ["https://www.googleapis.com/auth/spreadsheets"]
+  );
 
-const sheets = google.sheets({ version: "v4", auth });
+  sheets = google.sheets({ version: "v4", auth });
+}
+
+/* =========================
+   🚀 Handler Netlify
+========================= */
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -33,7 +49,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { name, email, phone } = JSON.parse(event.body);
+    const { name, email, phone } = JSON.parse(event.body || "{}");
 
     if (!name || !email || !phone) {
       return {
@@ -42,52 +58,48 @@ exports.handler = async (event) => {
       };
     }
 
-    // 💾 SALVA NO FIRESTORE
-    const docRef = await db.collection("leads").add({
+    /* 🔐 Inicializa serviços */
+    initFirebase();
+    initSendGrid();
+    initGoogleSheets();
+
+    /* 💾 Firestore */
+    await db.collection("leads").add({
       name,
       email,
       phone,
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
-    console.log("Lead salvo no Firestore com ID:", docRef.id);
 
-    // 📧 ENVIA EMAIL
-    try {
+    /* 📧 Email */
+    if (process.env.LEAD_RECEIVER_EMAIL) {
       await sgMail.send({
         to: process.env.LEAD_RECEIVER_EMAIL,
         from: process.env.SENDGRID_FROM_EMAIL,
         subject: "🔥 Novo Lead - Genius In Tech",
         text: `Nome: ${name}\nEmail: ${email}\nTelefone: ${phone}`,
       });
-      console.log("Email enviado com sucesso!");
-    } catch (err) {
-      console.error("Erro enviando email:", err);
     }
 
-    // 📝 ADICIONA NO GOOGLE SHEETS
-    try {
-      const response = await sheets.spreadsheets.values.append({
-        spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        range: "Leads!A:G",
-        valueInputOption: "USER_ENTERED",
-        requestBody: {
-          values: [
-            [
-              new Date().toLocaleString("pt-BR"),
-              name,
-              email,
-              phone,
-              "Site",
-              "Novo",
-              "",
-            ],
+    /* 📝 Google Sheets */
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: "Leads!A:G",
+      valueInputOption: "USER_ENTERED",
+      requestBody: {
+        values: [
+          [
+            new Date().toLocaleString("pt-BR"),
+            name,
+            email,
+            phone,
+            "Site",
+            "Novo",
+            "",
           ],
-        },
-      });
-      console.log("Google Sheets atualizado:", response.data);
-    } catch (err) {
-      console.error("Erro ao salvar no Google Sheets:", err);
-    }
+        ],
+      },
+    });
 
     return {
       statusCode: 200,
