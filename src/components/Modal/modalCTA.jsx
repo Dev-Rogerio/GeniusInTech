@@ -2,6 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import "../../components/Modal/modal.cta.css";
 import CampaignCountdown from "../CampaignCountdown";
 
+/**
+ * URL correta da API (corrige erro em /landingpage)
+ */
+const API_URL = import.meta.env.DEV
+  ? "http://localhost:8888/.netlify/functions/leads"
+  : "https://www.geniusintech.com.br/.netlify/functions/leads";
+
 function ModalCTA({ isOpen, onClose }) {
   const [form, setForm] = useState({
     name: "",
@@ -14,25 +21,31 @@ function ModalCTA({ isOpen, onClose }) {
   const nameInputRef = useRef(null);
   const modalRef = useRef(null);
 
+  /**
+   * Foco automático e scroll ao abrir
+   */
   useEffect(() => {
     if (!isOpen) return;
 
     requestAnimationFrame(() => {
       modalRef.current?.scrollTo(0, 0);
+      nameInputRef.current?.focus();
     });
-
-    nameInputRef.current?.focus();
   }, [isOpen]);
 
+  /**
+   * Atualiza campos do formulário
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Envio do formulário
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("🚀 SUBMIT DISPARADO");
 
     const { name, email, phone } = form;
 
@@ -44,25 +57,31 @@ function ModalCTA({ isOpen, onClose }) {
     setLoading(true);
 
     try {
-      console.log("📡 ENVIANDO PARA API");
+      console.log("📡 Enviando lead para:", API_URL);
 
-      const response = await fetch("/.netlify/functions/leads", {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
-      const data = await response.json();
+      const rawText = await response.text();
+      console.log("📥 Resposta bruta:", rawText);
 
-      console.log("📥 RESPOSTA DA API:", data);
+      let data;
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        throw new Error("Resposta inválida do servidor");
+      }
 
       if (!response.ok) {
         console.error("❌ Erro da API:", data);
-        alert("Erro ao enviar lead.");
+        alert(data.error || "Erro ao enviar lead.");
         return;
       }
 
-      console.log("✅ LEAD ENVIADO COM SUCESSO");
+      console.log("✅ Lead enviado com sucesso:", data);
 
       alert("Lead enviado com sucesso!");
       setForm({ name: "", email: "", phone: "" });
@@ -96,6 +115,7 @@ function ModalCTA({ isOpen, onClose }) {
             <p className="price-title">
               Landing Page Profissional + Sistema de Leads
             </p>
+
             <strong className="price-value">R$ 700,00</strong>
 
             <span className="price-subtitle">
