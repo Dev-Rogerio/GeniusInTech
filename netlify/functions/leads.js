@@ -1,13 +1,9 @@
-const admin = require("firebase-admin");
-const sgMail = require("@sendgrid/mail");
-const { google } = require("googleapis");
+import admin from "firebase-admin";
+import sgMail from "@sendgrid/mail";
+import { google } from "googleapis";
 
 let db;
 let sheets;
-
-/* =========================
-   🔐 Inicializações Seguras
-========================= */
 
 function initFirebase() {
   if (!admin.apps.length) {
@@ -39,11 +35,7 @@ function initGoogleSheets() {
   sheets = google.sheets({ version: "v4", auth });
 }
 
-/* =========================
-   🚀 Handler Netlify
-========================= */
-
-exports.handler = async (event) => {
+export async function handler(event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
@@ -58,12 +50,10 @@ exports.handler = async (event) => {
       };
     }
 
-    /* 🔐 Inicializa serviços */
     initFirebase();
     initSendGrid();
     initGoogleSheets();
 
-    /* 💾 Firestore */
     await db.collection("leads").add({
       name,
       email,
@@ -71,7 +61,6 @@ exports.handler = async (event) => {
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
-    /* 📧 Email */
     if (process.env.LEAD_RECEIVER_EMAIL) {
       await sgMail.send({
         to: process.env.LEAD_RECEIVER_EMAIL,
@@ -81,7 +70,6 @@ exports.handler = async (event) => {
       });
     }
 
-    /* 📝 Google Sheets */
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
       range: "Leads!A:G",
@@ -112,4 +100,4 @@ exports.handler = async (event) => {
       body: JSON.stringify({ error: "Erro interno" }),
     };
   }
-};
+}
