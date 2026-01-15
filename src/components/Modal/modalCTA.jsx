@@ -2,28 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import "../../components/Modal/modal.cta.css";
 import CampaignCountdown from "../CampaignCountdown";
 
-/**
- * URL correta da API (corrige erro em /landingpage)
- */
-const API_URL = import.meta.env.DEV
-  ? "http://localhost:8888/.netlify/functions/leads"
-  : "https://www.geniusintech.com.br/.netlify/functions/leads";
-
 function ModalCTA({ isOpen, onClose }) {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
-
   const [loading, setLoading] = useState(false);
 
   const nameInputRef = useRef(null);
   const modalRef = useRef(null);
 
-  /**
-   * Foco automático e scroll ao abrir
-   */
   useEffect(() => {
     if (!isOpen) return;
 
@@ -33,65 +17,14 @@ function ModalCTA({ isOpen, onClose }) {
     });
   }, [isOpen]);
 
-  /**
-   * Atualiza campos do formulário
-   */
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  /**
-   * Envio do formulário
-   */
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const { name, email, phone } = form;
-
-    if (!name || !email || !phone) {
-      alert("Preencha todos os campos!");
-      return;
-    }
-
+  const handleSubmit = () => {
     setLoading(true);
 
-    try {
-      console.log("📡 Enviando lead para:", API_URL);
-
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-
-      const rawText = await response.text();
-      console.log("📥 Resposta bruta:", rawText);
-
-      let data;
-      try {
-        data = JSON.parse(rawText);
-      } catch {
-        throw new Error("Resposta inválida do servidor");
-      }
-
-      if (!response.ok) {
-        console.error("❌ Erro da API:", data);
-        alert(data.error || "Erro ao enviar lead.");
-        return;
-      }
-
-      console.log("✅ Lead enviado com sucesso:", data);
-
-      alert("Lead enviado com sucesso!");
-      setForm({ name: "", email: "", phone: "" });
-      onClose();
-    } catch (error) {
-      console.error("🔥 Erro de conexão:", error);
-      alert("Falha ao conectar com o servidor.");
-    } finally {
+    setTimeout(() => {
       setLoading(false);
-    }
+      alert("Lead enviado com sucesso 🚀");
+      onClose();
+    }, 800);
   };
 
   if (!isOpen) return null;
@@ -110,73 +43,34 @@ function ModalCTA({ isOpen, onClose }) {
           geração de leads reais para o seu negócio.
         </p>
 
-        <div className="modal-price-info">
-          <div className="price-content">
-            <p className="price-title">
-              Landing Page Profissional + Sistema de Leads
-            </p>
-
-            <strong className="price-value">R$ 700,00</strong>
-
-            <span className="price-subtitle">
-              Valor promocional de campanha • Vagas limitadas
-            </span>
-
-            <p className="modal-price-note">
-              💡 Projetos desse tipo normalmente variam entre
-              <strong> R$ 1.200 e R$ 2.000</strong>.
-              <br />
-              Este valor é uma <strong>condição especial de campanha</strong>.
-            </p>
-          </div>
-        </div>
-
-        <div className="modal-includes">
-          <h3>O que você recebe</h3>
-          <ul>
-            <li>Landing page estratégica focada em conversão</li>
-            <li>Design profissional e personalizado</li>
-            <li>Totalmente responsiva</li>
-            <li>Integração com WhatsApp</li>
-            <li>Sistema de captura de leads</li>
-            <li>Entrega rápida + suporte inicial</li>
-          </ul>
-        </div>
-
         <CampaignCountdown />
 
-        <form className="modal-form" onSubmit={handleSubmit}>
+        {/* 🔥 NETLIFY FORM REAL */}
+        <form
+          name="leads"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          className="modal-form"
+          onSubmit={handleSubmit}
+        >
+          <input type="hidden" name="form-name" value="leads" />
+          <input type="hidden" name="bot-field" />
+
           <input
             ref={nameInputRef}
             name="name"
             type="text"
             placeholder="Seu nome"
-            value={form.name}
-            onChange={handleChange}
             required
           />
 
-          <input
-            name="email"
-            type="email"
-            placeholder="Seu e-mail"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
+          <input name="email" type="email" placeholder="Seu e-mail" required />
 
-          <input
-            name="phone"
-            type="tel"
-            placeholder="Seu telefone"
-            value={form.phone}
-            onChange={handleChange}
-            required
-          />
+          <input name="phone" type="tel" placeholder="Seu telefone" required />
 
           <p className="modal-cta-hint">
-            🔒 Seus dados estão seguros. Entrarei em contato pelo WhatsApp sem
-            compromisso.
+            🔒 Seus dados estão seguros. Entrarei em contato pelo WhatsApp.
           </p>
 
           <button type="submit" className="modal-btn" disabled={loading}>
