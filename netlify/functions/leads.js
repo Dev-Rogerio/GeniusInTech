@@ -114,24 +114,24 @@ export async function handler(event) {
     /* =========================
        📊 Google Sheets
     ========================= */
-    await sheets.spreadsheets.values.append({
-      spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "Leads!A:G",
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values: [
-          [
-            new Date().toLocaleString("pt-BR"),
-            name,
-            email,
-            phone,
-            "Site",
-            "Novo",
-            "",
-          ],
-        ],
-      },
-    });
+    // await sheets.spreadsheets.values.append({
+    //   spreadsheetId: process.env.GOOGLE_SHEET_ID,
+    //   range: "Leads!A:G",
+    //   valueInputOption: "USER_ENTERED",
+    //   requestBody: {
+    //     values: [
+    //       [
+    //         new Date().toLocaleString("pt-BR"),
+    //         name,
+    //         email,
+    //         phone,
+    //         "Site",
+    //         "Novo",
+    //         "",
+    //       ],
+    //     ],
+    //   },
+    // });
 
     return {
       statusCode: 200,
