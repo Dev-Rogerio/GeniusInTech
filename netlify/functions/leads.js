@@ -58,7 +58,11 @@ export async function handler(event) {
   }
 
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, headers, body: "Method Not Allowed" };
+    return {
+      statusCode: 405,
+      headers,
+      body: "Method Not Allowed",
+    };
   }
 
   try {
@@ -72,11 +76,12 @@ export async function handler(event) {
       };
     }
 
+    /* 🔐 Inicializa serviços */
     initFirebase();
     initSendGrid();
     initGoogleSheets();
 
-    /* 🔥 Firestore */
+    /* 🔥 Firestore (PRIMEIRO – nunca pode falhar) */
     await db.collection("leads").add({
       name,
       email,
@@ -84,17 +89,31 @@ export async function handler(event) {
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
-    /* 📧 Email */
-    if (process.env.LEAD_RECEIVER_EMAIL) {
-      await sgMail.send({
-        to: process.env.LEAD_RECEIVER_EMAIL,
-        from: process.env.SENDGRID_FROM_EMAIL,
-        subject: "🔥 Novo Lead - Genius In Tech",
-        text: `Nome: ${name}\nEmail: ${email}\nTelefone: ${phone}`,
-      });
+    /* =========================
+       📧 Email (NÃO BLOQUEANTE)
+       👉 SE FALHAR, NÃO QUEBRA
+    ========================= */
+    if (
+      process.env.SENDGRID_API_KEY &&
+      process.env.SENDGRID_FROM_EMAIL &&
+      process.env.LEAD_RECEIVER_EMAIL
+    ) {
+      try {
+        await sgMail.send({
+          to: process.env.LEAD_RECEIVER_EMAIL,
+          from: process.env.SENDGRID_FROM_EMAIL,
+          subject: "🔥 Novo Lead - Genius In Tech",
+          text: `Nome: ${name}\nEmail: ${email}\nTelefone: ${phone}`,
+        });
+      } catch (emailError) {
+        console.error("Erro ao enviar email:", emailError);
+        // NÃO lança erro
+      }
     }
 
-    /* 📊 Google Sheets */
+    /* =========================
+       📊 Google Sheets
+    ========================= */
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
       range: "Leads!A:G",
