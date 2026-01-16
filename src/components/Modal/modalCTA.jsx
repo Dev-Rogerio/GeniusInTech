@@ -32,7 +32,7 @@ function ModalCTA({ isOpen, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("🚀 SUBMIT DISPARADO");
+    if (loading) return;
 
     const { name, email, phone } = form;
 
@@ -44,31 +44,27 @@ function ModalCTA({ isOpen, onClose }) {
     setLoading(true);
 
     try {
-      console.log("📡 ENVIANDO PARA API");
-
-      const response = await fetch("/.netlify/functions/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/leads`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, phone }),
+        }
+      );
 
       const data = await response.json();
 
-      console.log("📥 RESPOSTA DA API:", data);
-
       if (!response.ok) {
-        console.error("❌ Erro da API:", data);
-        alert("Erro ao enviar lead.");
-        return;
+        throw new Error(data.message || "Erro ao enviar lead");
       }
 
-      console.log("✅ LEAD ENVIADO COM SUCESSO");
+      alert("✅ Mensagem enviada! Entrarei em contato em breve.");
 
-      alert("Lead enviado com sucesso!");
       setForm({ name: "", email: "", phone: "" });
       onClose();
     } catch (error) {
-      console.error("🔥 Erro de conexão:", error);
+      console.error(error);
       alert("Falha ao conectar com o servidor.");
     } finally {
       setLoading(false);

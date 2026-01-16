@@ -29,3 +29,8 @@ meu-servidor/
 
 # Local Netlify folder
 .netlify
+
+# Backend
+backend/node_modules
+backend/.env
+backend/service-account.json
