@@ -1,19 +1,25 @@
 import sgMail from "@sendgrid/mail";
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+if (!process.env.SENDGRID_API_KEY) {
+  console.warn("⚠️ SENDGRID_API_KEY não definida");
+} else {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+}
 
-export const sendLeadEmail = async ({ name, email, phone }) => {
-  await sgMail.send({
+export async function sendLeadEmail({ name, email, phone }) {
+  if (!process.env.SENDGRID_API_KEY) return;
+
+  const msg = {
     to: process.env.EMAIL_TO,
-    from: process.env.EMAIL_FROM,
-    subject: "🔥 Novo lead capturado no site",
+    from: "contato@geniusintech.com.br",
+    subject: "Novo lead - GeniusInTech",
     html: `
-      <h2>Novo Lead Recebido</h2>
+      <h3>Novo lead recebido</h3>
       <p><strong>Nome:</strong> ${name}</p>
-      <p><strong>E-mail:</strong> ${email}</p>
+      <p><strong>Email:</strong> ${email}</p>
       <p><strong>Telefone:</strong> ${phone}</p>
-      <hr />
-      <p>📅 ${new Date().toLocaleString()}</p>
     `,
-  });
-};
+  };
+
+  await sgMail.send(msg);
+}

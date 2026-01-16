@@ -10,9 +10,14 @@ dotenv.config({
   path: path.resolve(process.cwd(), ".env"),
 });
 
+// console.log("ENV CHECK:", {
+//   EMAIL_USER: process.env.EMAIL_USER,
+//   EMAIL_PASS: process.env.EMAIL_PASS ? "OK" : "MISSING",
+//   EMAIL_TO: process.env.EMAIL_TO,
+// });
+
 console.log("ENV CHECK:", {
-  EMAIL_USER: process.env.EMAIL_USER,
-  EMAIL_PASS: process.env.EMAIL_PASS ? "OK" : "MISSING",
+  SENDGRID_API_KEY: process.env.SENDGRID_API_KEY ? "OK" : "MISSING",
   EMAIL_TO: process.env.EMAIL_TO,
 });
 
