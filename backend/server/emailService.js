@@ -11,7 +11,10 @@ export async function sendLeadEmail({ name, email, phone }) {
 
   const msg = {
     to: process.env.EMAIL_TO,
-    from: process.env.EMAIL_FROM,
+    from: {
+      email: process.env.SENDGRID_FROM_EMAIL,
+      name: "Genius In Tech",
+    },
     subject: "Novo lead - GeniusInTech",
     html: `
       <h3>Novo lead recebido</h3>
@@ -21,5 +24,16 @@ export async function sendLeadEmail({ name, email, phone }) {
     `,
   };
 
-  await sgMail.send(msg);
+  try {
+    await sgMail.send(msg);
+    console.log("📧 Email enviado com sucesso");
+  } catch (error) {
+    console.error("❌ Erro ao enviar email:");
+    if (error.response) {
+      console.error(error.response.body);
+    } else {
+      console.error(error);
+    }
+    throw error;
+  }
 }
