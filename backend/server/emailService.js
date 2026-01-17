@@ -11,7 +11,7 @@ export async function sendLeadEmail({ name, email, phone }) {
 
   const msg = {
     to: process.env.EMAIL_TO,
-    from: "contato@geniusintech.com.br",
+    from: process.env.EMAIL_FROM,
     subject: "Novo lead - GeniusInTech",
     html: `
       <h3>Novo lead recebido</h3>

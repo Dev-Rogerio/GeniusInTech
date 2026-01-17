@@ -26,7 +26,11 @@ const PORT = process.env.PORT || 3001;
 
 app.use(
   cors({
-    origin: ["https://geniusintech.com.br", "https://www.geniusintech.com.br"],
+    origin: [
+      "http://localhost:3000",
+      "https://geniusintech.com.br",
+      "https://www.geniusintech.com.br",
+    ],
     methods: ["GET", "POST"],
   })
 );
